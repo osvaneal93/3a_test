@@ -27,7 +27,7 @@ class _EatViewState extends State<EatView> {
             children: [
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: _rowNameButton(context, Icons.add)),
+                  child: _rowNameButton(context, Icons.add, 'Favorites')),
               _buttonsTabBar(),
               _tapBarViews(context, screenSize),
             ],
@@ -53,12 +53,12 @@ class _EatViewState extends State<EatView> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: _rowNameButton(context, FontAwesomeIcons.trashCan),
+                    child: _rowNameButton(context, FontAwesomeIcons.trashCan, 'Happy Hour'),
                   ),
-                  _locationCard(context, screenSize, 0),
-                  _locationCard(context, screenSize, 1),
-                  _locationCard(context, screenSize, 2),
-                  _locationCard(context, screenSize, 0),
+                  _locationCard(context, screenSize, 0,'Broken Shaker at Freehand Miami' ),
+                  _locationCard(context, screenSize, 1,'Esotico Miami'),
+                  _locationCard(context, screenSize, 2,'Datos de API'),
+                  _locationCard(context, screenSize, 0,'Datos de API'),
                 ],
               ),
             ),
@@ -222,15 +222,18 @@ class _EatViewState extends State<EatView> {
         child: Icon(iconData, color: Colors.black));
   }
 
-  Row _rowNameButton(BuildContext context, IconData iconData) {
+  Row _rowNameButton(BuildContext context, IconData iconData, String name) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            'Favorites',
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
+           Padding(
+             padding: const EdgeInsets.only(top: 8.0),
+             child: Text(
+              name,
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
           ),
+           ),
           _neumoButton(
             context,
             iconData,
@@ -265,7 +268,7 @@ class _EatViewState extends State<EatView> {
     );
   }
 
-  _locationCard(BuildContext context, Size screenSize, int index) {
+  _locationCard(BuildContext context, Size screenSize, int index, String title) {
     return Card(
       elevation: 5,
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -329,10 +332,10 @@ class _EatViewState extends State<EatView> {
                       ),
                       Container(
                           width: screenSize.width * .4,
-                          child: const Text(
-                            'Broken Shaker at Freehand Miani',
+                          child:  Text(
+                            title,
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w800),
+                                fontSize: 20, fontWeight: FontWeight.w600),
                           )),
                     ],
                   )
